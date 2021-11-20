@@ -24,17 +24,15 @@ const jwtMiddleware = exjwt({
 
 app.use('/auth', authRouter);
 
-
 async function start() {
   try {
-    const uri = `mongodb://109.86.230.100/todo`
-    await mongoose.connect(uri, {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
     console.log('MongoDB connected.')
     app.listen(
-      8000,
+      process.env.PORT,
       console.log.bind(console, `Server has been started on port 8000`)
     )
   } catch (e) {
