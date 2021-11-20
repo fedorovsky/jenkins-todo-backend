@@ -24,21 +24,20 @@ const jwtMiddleware = exjwt({
 
 app.use('/auth', authRouter);
 
-async function start() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
-    console.log('MongoDB connected.')
-    app.listen(
-      process.env.PORT,
-      console.log.bind(console, `Server has been started on port 8000`)
-    )
-  } catch (e) {
-    console.log('MongoDB connection failed.', e.message)
-    console.log(e)
-  }
-}
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Successfully connect to MongoDB.");
+  })
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  }); 
 
-start();
+  app.listen(
+    process.env.PORT,
+    console.log.bind(console, `Server has been started on port 8000`)
+  )
