@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const exjwt = require('express-jwt');
+const expressJwt = require('express-jwt');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const logger = require('morgan');
@@ -19,13 +19,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Instantiating the express-jwt middleware
-// const jwtMiddleware = exjwt({
-//   secret: process.env.JWT_SECRET,
-//   algorithms: ['HS256'],
-// });
+const jwtCheck = expressJwt({
+  secret: process.env.JWT_ACCESS_SECRET,
+  algorithms: ['HS256'],
+});
 
 app.use('/api', apiRouter);
+
+app.get('/test', jwtCheck, (req, res)=> {
+  res.send('hello world');
+});
 
 const start = async () => {
   try {
