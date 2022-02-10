@@ -2,7 +2,7 @@
   "name": "jenkins-test",
   "version": "1.0.0",
   "description": "jenkins-test",
-  "main": "server.js",
+  "main": "app/index.js",
   "keywords": [
     "node.js",
     "express",
@@ -11,7 +11,7 @@
     "mongodb"
   ],
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon app/index.js"
   },
   "repository": {
     "type": "git",

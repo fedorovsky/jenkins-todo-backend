@@ -5,9 +5,9 @@ const expressJwt = require('express-jwt');
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const logger = require('morgan');
-const apiRouter = require('./app/router/api');
+const apiRouter = require('./router/api');
 
-require('dotenv').config();
+  require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
 
